@@ -9,5 +9,15 @@ router.get('/', function(req, res, next) {
   });
 });
 
+router.post('/', function(req, res, next_) {
+    if (req.body.attachments) {
+        req.body.attachments.forEach(function(attachment) {
+            if (attachment.type == "mentions") {
+                console.log("mentions " + attachment.user_ids + " at " + attachment.loci);
+            }
+        });
+    }
+});
+
 
 module.exports = router;
