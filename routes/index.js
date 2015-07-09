@@ -28,21 +28,28 @@ router.post('/', function(req, res, next_) {
                             if (c == '+') {
                                 if ((j + 1) < message.length) {
                                     var nextc = message[j + 1];
-                                    if (nextc == '+') console.log("add");
+                                    if (nextc == '+') {
+                                        console.log("add");
+                                        return;
+                                    }
                                 }
                             } else if (c == '-') {
                                 if ((j + 1) < message.length) {
                                     var nextc = message[j + 1];
-                                    if (nextc == '-') console.log("minus");
+                                    if (nextc == '-') {
+                                        console.log("minus");
+                                        return;
+                                    }
                                 }
                             } else {
                                 var patt = /\s/g;
                                 if (!patt.test(c)) {
                                     console.log("nothing");
                                     return;
-                                }
-                            }
+                                } 
+                            } 
                         }
+                        console.log("nothing");
                     }
                 }
         });
