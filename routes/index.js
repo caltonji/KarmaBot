@@ -12,29 +12,41 @@ router.get('/', function(req, res, next) {
 router.post('/', function(req, res, next_) {
     if (req.body.attachments) {
         console.log(req.body);
-	var message = req.body.text;
-	req.body.attachments.forEach(function(attachment) {
-            if (attachment.type == "mentions") {
-		var i;
-                for (i = 0; i < attachment.user_ids.length; i++) {
-		    var user_id = attachment.user_ids[i];
-		    var loc = attachment.loci[i]; 
-		    var name = message.substring(loc[0], loc[0] + loc[1]);
-		    console.log("mentions " + user_id + " or " + name + "  at " + loc);
-		    var j;
-		    for (j = (loc[0] + loc[1]); j < messsage.length; j++) {
-			var c = message[j];
-			if(c == '+') {
-			    if ((j + 1) < message.length) {
-				var nextc = message[j + 1];
-			    	if (nextc == '+') console.log("add");
-			    }
-			}
-		    }
-		}
-            }
+        var message = req.body.text;
+        req.body.attachments.forEach(function(attachment) {
+                if (attachment.type == "mentions") {
+                    var i;
+                    for (i = 0; i < attachment.user_ids.length; i++) {
+                        var user_id = attachment.user_ids[i];
+                        var loc = attachment.loci[i];
+                        var name = message.substring(loc[0], loc[0] + loc[1]);
+                        console.log("mentions " + user_id + " or " + name + "  at " + loc);
+                        var j;
+                        // start after the last letter in mention and parse for increment or decrement
+                        for (j = (loc[0] + loc[1]); j < message.length; j++) {
+                            var c = message[j];
+                            if (c == '+') {
+                                if ((j + 1) < message.length) {
+                                    var nextc = message[j + 1];
+                                    if (nextc == '+') console.log("add");
+                                }
+                            } else if (c == '-') {
+                                if ((j + 1) < message.length) {
+                                    var nextc = message[j + 1];
+                                    if (nextc == '-') console.log("minus");
+                                }
+                            } else {
+                                var patt = /\s/g;
+                                if (!patt.test(c)) {
+                                    console.log("nothing");
+                                    return;
+                                }
+                            }
+                        }
+                    }
+                }
         });
-    }
+       }
 });
 
 
