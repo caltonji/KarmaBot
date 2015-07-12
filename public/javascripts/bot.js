@@ -1,97 +1,61 @@
 /**
- * Created by AltonjiC on 6/20/15.
+ * Created by AltonjiC on 7/11/15.
  */
-var HTTPS = require('https');
+/*
+    TODO: instantiate group data like members and create internal functions
+    for acessing that data that belong to the bot.  All data should go in
+    mongo but methods for accessing them are here even though most of there functionality
+    is actually in the services and elsewhere
+ */
+var Bot = function (botId) {
+    this.bot_id = botId;
+};
 
-var botID = "c793d95da23665d19c6a4b7216";
-
-//function respond() {
-//    var request = JSON.parse(this.req.chunks[0]),
-//        botRegex = /^\/cool guy$/;
-//
-//    if(request.text && botRegex.test(request.text)) {
-//        this.res.writeHead(200);
-//        postMessage();
-//        this.res.end();
-//    } else {
-//        console.log("don't care");
-//        this.res.writeHead(200);
-//        this.res.end();
-//    }
-//}
-
-module.exports = {
-
-    send: function (response) {
-        var botResponse, options, body, botReq;
-
-        botResponse = response;
-
-        options = {
-            hostname: 'api.groupme.com',
-            path: '/v3/bots/post',
-            method: 'POST'
-        };
-
-        body = {
-            "bot_id": botID,
-            "text": botResponse
-        };
-
-        console.log('sending ' + botResponse + ' to ' + botID);
-
-        botReq = HTTPS.request(options, function (res) {
-            if (res.statusCode == 202) {
-                //neat
-            } else {
-                console.log('rejecting bad status code ' + res.statusCode);
-            }
-        });
-
-        botReq.on('error', function (err) {
-            console.log('error posting message ' + JSON.stringify(err));
-        });
-        botReq.on('timeout', function (err) {
-            console.log('timeout posting message ' + JSON.stringify(err));
-        });
-        botReq.end(JSON.stringify(body));
-    }
+Bot.prototype.botCreated = function() {
+    this.send("hey, I'm your new bot! You can call me " + this.botId);
 }
-//
-//function postMessage() {
-//    var botResponse, options, body, botReq;
-//
-//    botResponse = cool();
-//
-//    options = {
-//        hostname: 'api.groupme.com',
-//        path: '/v3/bots/post',
-//        method: 'POST'
-//    };
-//
-//    body = {
-//        "bot_id" : botID,
-//        "text" : botResponse
-//    };
-//
-//    console.log('sending ' + botResponse + ' to ' + botID);
-//
-//    botReq = HTTPS.request(options, function(res) {
-//        if(res.statusCode == 202) {
-//            //neat
-//        } else {
-//            console.log('rejecting bad status code ' + res.statusCode);
-//        }
-//    });
-//
-//    botReq.on('error', function(err) {
-//        console.log('error posting message '  + JSON.stringify(err));
-//    });
-//    botReq.on('timeout', function(err) {
-//        console.log('timeout posting message '  + JSON.stringify(err));
-//    });
-//    botReq.end(JSON.stringify(body));
-//}
-//
-//
-//exports.respond = respond;
+
+Bot.prototype.receive = function(body) {
+    this.send(body.text);
+}
+
+
+Bot.prototype.send = function (message) {
+    var botResponse, options, body, botReq, botId;
+
+    var HTTPS = require('https');
+
+    botResponse = message;
+    botId = this.botId;
+
+    options = {
+        hostname: 'api.groupme.com',
+        path: '/v3/bots/post',
+        method: 'POST'
+    };
+
+    body = {
+        "bot_id": botId,
+        "text": botResponse
+    };
+
+    console.log('sending ' + botResponse + ' to ' + botId);
+
+    botReq = HTTPS.request(options, function (res) {
+        if (res.statusCode == 202) {
+            //neat
+        } else {
+            console.log('rejecting bad status code ' + res.statusCode);
+        }
+    });
+
+    botReq.on('error', function (err) {
+        console.log('error posting message ' + JSON.stringify(err));
+    });
+    botReq.on('timeout', function (err) {
+        console.log('timeout posting message ' + JSON.stringify(err));
+    });
+    botReq.end(JSON.stringify(body));
+};
+
+module.exports = Bot;

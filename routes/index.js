@@ -1,60 +1,40 @@
 var express = require('express');
 var router = express.Router();
-var wordService = require("../services/wordService.js");
+
+var botService = require('../services/botService.js');
+var applicationService = require('../services/applicationService.js');
+var bot_path = '../public/javascripts/bot.js';
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  wordService.getOrderedArray(function(words) {
-      res.render('index', { title: 'StatBot',  words: words});
-  });
+    res.json({home: "of the brave"});
 });
 
-router.post('/', function(req, res, next_) {
-    if (req.body.attachments) {
-        console.log(req.body);
-        var message = req.body.text;
-        req.body.attachments.forEach(function(attachment) {
-                if (attachment.type == "mentions") {
-                    var i;
-                    for (i = 0; i < attachment.user_ids.length; i++) {
-                        var user_id = attachment.user_ids[i];
-                        var loc = attachment.loci[i];
-                        var name = message.substring(loc[0], loc[0] + loc[1]);
-                        console.log("mentions " + user_id + " or " + name + "  at " + loc);
-                        var j;
-                        // start after the last letter in mention and parse for increment or decrement
-                        for (j = (loc[0] + loc[1]); j < message.length; j++) {
-                            var c = message[j];
-                            if (c == '+') {
-                                if ((j + 1) < message.length) {
-                                    var nextc = message[j + 1];
-                                    if (nextc == '+') {
-                                        console.log("add");
-                                        return;
-                                    }
-                                }
-                            } else if (c == '-') {
-                                if ((j + 1) < message.length) {
-                                    var nextc = message[j + 1];
-                                    if (nextc == '-') {
-                                        console.log("minus");
-                                        return;
-                                    }
-                                }
-                            } else {
-                                var patt = /\s/g;
-                                if (!patt.test(c)) {
-                                    console.log("nothing");
-                                    return;
-                                } 
-                            } 
-                        }
-                        console.log("nothing");
-                    }
-                }
-        });
-       }
+router.post('/m/:bot_id', function(req, res, next) {
+    if (req.body.sender_type != 'bot') {
+        var bot_id = req.params.bot_id;
+//        botService.getApplication(bot_id, function(application) {
+//            var ThisBot = require(application.bot_path);
+//            var thisBot = new ThisBot(bot_id);
+//
+//            thisBot.receive(req.body);
+//        });
+        var ThisBot = require(bot_path);
+        var thisBot = new ThisBot(bot_id);
+
+        thisBot.receive(req.body);
+    }
+});
+
+router.post('/a/:bot_id', function(req, res, next) {
+    var bot_id = req.params.bot_id;
+    var ThisBot = require(bot_path);
+    var thisBot = new ThisBot(bot_id);
+
+
+    thisBot.botCreated();
 });
 
 
 module.exports = router;
+

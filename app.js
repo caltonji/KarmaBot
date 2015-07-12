@@ -9,14 +9,13 @@ var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost:27017/Karma');
 
 //Models
-var Word = require('./models/word');
-var Message = require('./models/message');
-
+var KarmaUser = require('./models/karmaUser');
+var Application = require('./models/application');
+var Bot = require('./models/bot');
 
 //declaring routes
 var routes = require('./routes/index');
 var users = require('./routes/users');
-var receive = require('./routes/receive');
 
 
 var app = express();
@@ -39,7 +38,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 //enabling routes
 app.use('/', routes);
 app.use('/users', users);
-app.use('/receive', receive);
 
 
 // catch 404 and forward to error handler
