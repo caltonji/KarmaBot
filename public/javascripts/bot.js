@@ -13,7 +13,7 @@ var Bot = function (botId) {
 };
 
 Bot.prototype.botCreated = function() {
-    this.send("hey, I'm your new bot! You can call me " + this.botId);
+    this.send("hey, I'm your new bot! You can call me " + this.bot_id);
 }
 
 Bot.prototype.receive = function(body) {
@@ -27,7 +27,7 @@ Bot.prototype.send = function (message) {
     var HTTPS = require('https');
 
     botResponse = message;
-    botId = this.botId;
+    botId = this.bot_id;
 
     options = {
         hostname: 'api.groupme.com',
