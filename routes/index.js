@@ -23,16 +23,19 @@ router.post('/m/:bot_id', function(req, res, next) {
         var thisBot = new ThisBot(bot_id);
 
         thisBot.receive(req.body);
+
+        res.json({home: "of the m" + bot_id});
     }
 });
 
-router.post('/a/:bot_id', function(req, res, next) {
+router.get('/a/:bot_id', function(req, res, next) {
     var bot_id = req.params.bot_id;
     var ThisBot = require(bot_path);
     var thisBot = new ThisBot(bot_id);
-
+    console.log(bot_id);
 
     thisBot.botCreated();
+    res.json({home: "of the a: " + bot_id});
 });
 
 
