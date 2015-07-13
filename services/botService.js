@@ -26,8 +26,15 @@ module.exports = {
             }
         });
     },
-    add: function(bot_id, group_id, application) {
-
+    add: function(bot_id, application, callback) {
+        var newBot = new Bot({bot_id : bot_id, application : application});
+        newBot.save(function (err) {
+            if (err) {
+                console.log("error in saving bot");
+                callback(false)
+            }
+            callback(true);
+        });
 
     }
 }

@@ -6,6 +6,7 @@ var Schema = mongoose.Schema;
 
 var ApplicationSchema = new Schema({
     connection_string: String,
+    name: String,
     bot_path: String
 })
 
