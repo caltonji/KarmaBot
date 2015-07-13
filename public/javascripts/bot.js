@@ -8,6 +8,7 @@
     is actually in the services and elsewhere
  */
 var Bot = function (botId) {
+    console.log("new bot!");
     this.bot_id = botId;
 };
 

@@ -30,9 +30,12 @@ router.post('/m/:bot_id', function(req, res, next) {
 
 router.get('/a/:bot_id', function(req, res, next) {
     var bot_id = req.params.bot_id;
+    console.log("bot_id: " + bot_id);
+    console.log("bot_path: " + bot_path);
     var ThisBot = require(bot_path);
+    console.log("ThisBot: " + ThisBot);
     var thisBot = new ThisBot(bot_id);
-    console.log(bot_id);
+    console.log("thisBot: " + thisBot);
 
     thisBot.botCreated();
     res.json({home: "of the a: " + bot_id});
