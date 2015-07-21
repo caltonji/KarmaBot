@@ -7,12 +7,25 @@
 var app = require('../app');
 var debug = require('debug')('StatBot:server');
 var http = require('http');
+var https = require('https');
+var fs = require('fs');
+
+
+// https options
+var options = {
+    key: fs.readFileSync('/Users/AltonjiC/WebstormProjects/Karma/key.pem'),
+    cert: fs.readFileSync('/Users/AltonjiC/WebstormProjects/Karma/cert.pem')
+};
+
+
+
+
 
 /**
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.PORT || '8082');
+var port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 
 /**
@@ -21,6 +34,10 @@ app.set('port', port);
 
 var server = http.createServer(app);
 
+
+
+
+
 /**
  * Listen on provided port, on all network interfaces.
  */
@@ -28,6 +45,13 @@ var server = http.createServer(app);
 server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
+
+
+// Create an HTTPS service identical to the HTTP service.
+var sslServer = https.createServer(options, app)
+sslServer.listen(443);
+sslServer.on('error', onError);
+sslServer.on('listening', onListening);
 
 /**
  * Normalize a port into a number, string, or false.

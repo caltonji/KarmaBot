@@ -16,6 +16,7 @@ var Bot = require('./models/bot');
 //declaring routes
 var routes = require('./routes/index');
 var users = require('./routes/users');
+var add = require('./routes/add');
 
 
 var app = express();
@@ -38,6 +39,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 //enabling routes
 app.use('/', routes);
 app.use('/users', users);
+app.use('/add', add);
+
 
 
 // catch 404 and forward to error handler
