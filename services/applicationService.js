@@ -25,5 +25,15 @@ module.exports = {
                 callback(doc);
             }
         });
+    },
+    getAllNames: function(callback) {
+        Application.find({}, function (err, results) {
+            var names = [];
+            for (var key in results) {
+                var result = results[key];
+                names.push(result.name);
+            }
+            callback(names);
+        });
     }
 }

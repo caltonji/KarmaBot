@@ -18,7 +18,6 @@ router.post('/m/:bot_id', function(req, res, next) {
             var thisBot = new ThisBot(bot_id);
 
             thisBot.receive(req.body);
-
         });
     }
 });

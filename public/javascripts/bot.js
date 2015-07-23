@@ -13,12 +13,12 @@ var Bot = function (botId) {
 };
 
 Bot.prototype.botCreated = function() {
-    this.send("hey, I'm your new bot! You can call me " + this.bot_id);
-}
+    this.send("hey, I'm your new Default bot! You can call me " + this.bot_id);
+};
 
 Bot.prototype.receive = function(body) {
     this.send(body.text);
-}
+};
 
 
 Bot.prototype.send = function (message) {

@@ -26,8 +26,8 @@ module.exports = {
             }
         });
     },
-    add: function(bot_id, application, callback) {
-        var newBot = new Bot({bot_id : bot_id, application : application});
+    add: function(bot_id, group_id, application, callback) {
+        var newBot = new Bot({bot_id : bot_id, group_id : group_id, application : application});
         newBot.save(function (err) {
             if (err) {
                 console.log("error in saving bot");
@@ -36,5 +36,22 @@ module.exports = {
             callback(true);
         });
 
+    },
+    /* If False, then the code will add a bot so default to true to never have repeats */
+    checkForBot: function(application, group_id, callback) {
+        var query = {'group_id' : group_id, 'application' : application};
+
+        Bot.findOne(query, function (err, doc) {
+            if (err) {
+                console.log("error in finding bot");
+                callback(true);
+            }
+            console.log(doc);
+            if (!doc) {
+                callback(false);
+            } else {
+                callback(doc);
+            }
+        });
     }
 }

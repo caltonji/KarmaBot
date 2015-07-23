@@ -2,4 +2,36 @@
    Created by AltonjiC on 7/20/15.
 extends layout
 block content
-    h1= title
+    div.container
+        form(action="/add/bot", method="post")
+            label Pick a Bot to Add
+            br
+            select(name="app_name" text="Bot Type")
+                each name in app_names
+                    option(value=name) !{name}
+            br
+            br
+            label Pick a Group to Add yo bot to
+            br
+            select(name="group_id" default="Pick yo Group")
+                each group in groups
+                    option(value=group.group_id) !{group.name}
+            br
+            br
+            input(name="token" type="hidden" value=token)
+            input(type="submit")
+    div.footer
+
+
+
+
+
+
+
+        //div.btn-group
+        //    button.btn.btn-default.dropdown-toggle(type="button", data-toggle="dropdown", aria-haspopup="true", aria-expanded="false")
+        //        | Action
+        //        span.caret
+        //    ul.dropdown-menu
+        //        each group in locals
+        //            li: a(href='#{group.group_id}') !{group.name}
