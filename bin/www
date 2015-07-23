@@ -13,8 +13,8 @@ var fs = require('fs');
 
 // https options
 var options = {
-    key: fs.readFileSync('/Users/AltonjiC/WebstormProjects/Karma/key.pem'),
-    cert: fs.readFileSync('/Users/AltonjiC/WebstormProjects/Karma/cert.pem')
+    key: fs.readFileSync('././key.pem'),
+    cert: fs.readFileSync('././cert.pem')
 };
 
 
