@@ -13,7 +13,10 @@ router.get('/', function(req, res, next) {
 router.post('/m/:bot_id', function(req, res, next) {
     if (req.body.sender_type != 'bot') {
         var bot_id = req.params.bot_id;
+        console.log("received: " + bot_id);
         botService.getApplication(bot_id, function(application) {
+            console.log("checking for everything: ");
+            console.log(application);
             var ThisBot = require(application.bot_path);
             var thisBot = new ThisBot(bot_id);
             thisBot.receive(req.body);
