@@ -6,7 +6,22 @@ var mongoose = require('mongoose');
 var Application = mongoose.model('Application');
 
 module.exports = {
-
+    get: function(id, callback) {
+        Application.findOne({'_id' : id}, function (err, doc) {
+            var retVal = false;
+            if (err) {
+                console.log("error in finding application");
+                callback(false);
+            }
+            console.log(doc);
+            if (!doc) {
+                console.log("this application is not in db: " + name);
+                callback(false);
+            } else {
+                callback(doc);
+            }
+        });
+    },
     getByName: function (name, callback) {
 
         var query = {'name': name};

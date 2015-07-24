@@ -4,7 +4,7 @@
 var mongoose = require('mongoose');
 
 var Bot = mongoose.model('Bot');
-
+var applicationService = require('./applicationService.js');
 module.exports = {
     getApplication: function (bot_id, callback) {
 
@@ -19,7 +19,9 @@ module.exports = {
                 callback(false);
             } else {
                 console.log("found");
-                callback(doc);
+                applicationService.get(doc.application, function(app) {
+                    callback(app);
+                });
             }
         });
     },
