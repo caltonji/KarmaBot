@@ -6,7 +6,7 @@ var http = require('http');
 var https = require('https');
 var jQuery = require('jquery');
 
-var botEndpoint = "http://altonji.com/:443/m"
+var botEndpoint = "http://altonji.com/:8081/m"
 var groupMeApiBase = "api.groupme.com";
 var botService = require('../services/botService.js');
 var applicationService = require('../services/applicationService.js');

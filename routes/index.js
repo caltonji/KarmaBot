@@ -16,19 +16,9 @@ router.post('/m/:bot_id', function(req, res, next) {
         botService.getApplication(bot_id, function(application) {
             var ThisBot = require(application.bot_path);
             var thisBot = new ThisBot(bot_id);
-
             thisBot.receive(req.body);
         });
     }
-});
-
-router.get('/a/:bot_id', function(req, res, next) {
-    var bot_id = req.params.bot_id;
-    var ThisBot = require(bot_path);
-    var thisBot = new ThisBot(bot_id);
-
-    thisBot.botCreated();
-    res.json({home: "of the a: " + bot_id});
 });
 
 router.get('/new_boring_bot/:bot_id', function(req, res, next) {
