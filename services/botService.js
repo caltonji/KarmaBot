@@ -8,9 +8,8 @@ var Bot = mongoose.model('Bot');
 module.exports = {
     getApplication: function (bot_id, callback) {
 
-        var query = {'bot_id': bot_id};
-
-        Bot.findOne(query, function (err, doc) {
+        console.log(Bot);
+        Bot.findOne({'bot_id': bot_id}, function (err, doc) {
             var retVal = false;
             if (err) {
                 console.log("error in finding bot");
