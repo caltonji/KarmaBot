@@ -12,6 +12,10 @@ var botService = require('../services/botService.js');
 var applicationService = require('../services/applicationService.js');
 
 
+var mongoose = require('mongoose');
+
+var Bot = mongoose.model('Bot');
+
 var router = express.Router();
 
 /* GET users listing. */

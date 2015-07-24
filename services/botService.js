@@ -9,9 +9,8 @@ module.exports = {
     getApplication: function (bot_id, callback) {
 
         var query = {'bot_id': bot_id};
-        console.log("about to query with: " + query);
+
         Bot.findOne(query, function (err, doc) {
-            console.log("something returned");
             var retVal = false;
             if (err) {
                 console.log("error in finding bot");
@@ -19,10 +18,11 @@ module.exports = {
             }
             console.log(doc);
             if (!doc) {
-                console.log("this bot_id is not in the db: " + bot_id);
+                console.log("this bot is not in db: " + bot_id);
                 callback(false);
             } else {
-                callback(doc.application);
+                console.log("found");
+                callback(doc);
             }
         });
     },
