@@ -8,14 +8,12 @@ var Bot = mongoose.model('Bot');
 module.exports = {
     getApplication: function (bot_id, callback) {
 
-        console.log(Bot);
         Bot.findOne({'bot_id': bot_id}, function (err, doc) {
             var retVal = false;
             if (err) {
                 console.log("error in finding bot");
                 callback(false);
             }
-            console.log(doc);
             if (!doc) {
                 console.log("this bot is not in db: " + bot_id);
                 callback(false);

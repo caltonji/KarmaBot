@@ -6,7 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongodb = require('mongodb');
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost:27017/Karma');
+mongoose.connect('mongodb://localhost:27017/Bot');
 
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
