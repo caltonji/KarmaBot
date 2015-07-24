@@ -6,7 +6,7 @@ var http = require('http');
 var https = require('https');
 var jQuery = require('jquery');
 
-var botEndpoint = "http://altonji.com/:8081/m"
+var botEndpoint = "http://altonji.com:8081/m"
 var groupMeApiBase = "api.groupme.com";
 var botService = require('../services/botService.js');
 var applicationService = require('../services/applicationService.js');
@@ -40,9 +40,9 @@ router.get('/', function(req, res, next) {
                     var group = groups[key];
                     groupJson[group.group_id] = group.name;
                 }
-                console.log(groups);
+                //console.log(groups);
                 applicationService.getAllNames(function(app_names) {
-                    console.log(app_names);
+                    //console.log(app_names);
                     res.render('../views/add', {"groups" : groups, "app_names" : app_names, "token" : req.query.access_token});
                 });
             });
