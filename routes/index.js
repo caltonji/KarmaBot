@@ -3,7 +3,6 @@ var router = express.Router();
 
 var botService = require('../services/botService.js');
 var applicationService = require('../services/applicationService.js');
-var bot_path = '../public/javascripts/boringBot.js';
 
 /* GET home page. */
 router.get('/', function(req, res, next) {

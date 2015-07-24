@@ -9,8 +9,9 @@ module.exports = {
     getApplication: function (bot_id, callback) {
 
         var query = {'bot_id': bot_id};
-        console.log("inside of getApplixation with: " + bot_id);
+        console.log("about to query with: " + query);
         Bot.findOne(query, function (err, doc) {
+            console.log("something returned");
             var retVal = false;
             if (err) {
                 console.log("error in finding bot");
