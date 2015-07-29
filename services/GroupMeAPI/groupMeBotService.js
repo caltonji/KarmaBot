@@ -3,6 +3,8 @@
  */
 var https = require('https');
 
+
+var botEndpoint = "http://altonji.com:8081/m";
 var groupMeApiBase = "api.groupme.com";
 var botService = require('../botService.js');
 var service = {};
