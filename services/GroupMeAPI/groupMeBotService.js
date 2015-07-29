@@ -38,7 +38,7 @@ var createBot = function (app, group_id, token, callback) {
         //the whole response has been recieved
         res.on('end', function () {
             var botInfo = JSON.parse(str).response;
-            this.updateBotCallbackUrl(botInfo, token, function (newBotInfo) {
+            updateBotCallbackUrl(botInfo, token, function (newBotInfo) {
                 if (newBotInfo) {
                     callback(newBotInfo);
                 } else {
@@ -119,7 +119,7 @@ var updateBotCallbackUrl = function (bot_info, token, callback) {
         });
         //the whole response has been recieved, should not exist
         res.on('end', function () {
-            this.checkBotCallbackUpdated(bot_info, token, function (success) {
+            checkBotCallbackUpdated(bot_info, token, function (success) {
                 if (success) {
                     callback(bot_info);
                 } else {
