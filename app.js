@@ -18,12 +18,14 @@ db.once('open', function callback () {
 var KarmaUser = require('./models/karmaUser');
 var Application = require('./models/application');
 var Bot = require('./models/bot');
+var Message = require('./models/message');
+var PendingBotMessage = require('./models/pendingBotMessage');
 
 //declaring routes
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var add = require('./routes/add');
-
+var messageDMZ = require('./routes/messageDMZ');
 
 var app = express();
 
@@ -46,7 +48,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 app.use('/users', users);
 app.use('/add', add);
-
+app.use('/dev', messageDMZ);
 
 
 // catch 404 and forward to error handler
