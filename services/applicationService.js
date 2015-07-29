@@ -15,7 +15,7 @@ module.exports = {
             }
             console.log(doc);
             if (!doc) {
-                console.log("this application is not in db: " + name);
+                console.log("this application is not in db: " + id);
                 callback(false);
             } else {
                 callback(doc);
