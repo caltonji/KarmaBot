@@ -10,6 +10,7 @@ var Messsage = mongoose.model('Message');
 var botService = require('../services/botService.js');
 var pendingBotMessageService = require('../services/pendingBotMessageService.js');
 
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
     res.json({Home: "of the messageDMZ"});
